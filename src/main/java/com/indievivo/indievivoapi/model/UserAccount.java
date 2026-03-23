@@ -6,12 +6,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
-@Table(
-        name = "user_account",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "uk_user_account_email", columnNames = "email")
-        }
-)
+@Table(name = "user_account", uniqueConstraints = {@UniqueConstraint(name = "uk_user_account_email", columnNames = "email")})
 public class UserAccount {
 
     @Id
@@ -49,11 +44,7 @@ public class UserAccount {
     private LocalDateTime updatedAt;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_account_role",
-            joinColumns = @JoinColumn(name = "user_account_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @JoinTable(name = "user_account_role", joinColumns = @JoinColumn(name = "user_account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @PrePersist
